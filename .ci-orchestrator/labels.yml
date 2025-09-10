@@ -11,7 +11,7 @@ triggers:
   - property: action
     include: labeled
   - property: repo
-    include: cognitive-software-delivery/ci-docs
+    include: OpenLiberty/for-automation-testing
   - property: labels
     include: "Opened by external contributor"
   - property: labels
