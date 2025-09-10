@@ -1,0 +1,34 @@
+type: pipeline_definition
+product: Liberty
+name: Test New Issues Trigger
+description: Tests that a pipeline is launched when a user labels an issue with the text Opened by external contributor
+triggers:
+- type: event
+  triggerName: test-label-trigger
+  groups: ["CSD"]
+  eventType: GitHubIssueData
+  eventFilters:
+  - property: action
+    include: labeled
+  - property: repo
+    include: cognitive-software-delivery/ci-docs
+  - property: labels
+    include: "Opened by external contributor"
+  - property: labels
+    exclude: "test"
+  propertyDefinitions:
+    - name: user
+      isRequired: true
+      description: "User who created issue"
+    - name: number
+      isRequired: true
+      description: "Issue number"
+    - name: githubUrl
+      isRequired: true
+      description: "Issue HTML URL"
+
+steps:
+- stepName: labelTrigger
+  workType: RTC
+  timeoutInMinutes: 1440
+  projectName: CI Orchestration Test Definition
